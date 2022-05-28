@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">No. Transaksi</label>
-                        <input type="text" class="form-control" name="kode" value="{{$kode}}" readonly>
+                        <input type="text" class="form-control" name="nota" value="{{$kode}}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Nama Pembeli</label>

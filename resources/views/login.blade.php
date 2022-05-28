@@ -104,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Main Footer -->
         <footer class="main-footer text-center">
-            <strong>Developed By Asrani</strong>
+            <strong>inventory</strong>
         </footer>
     </div>
     <!-- ./wrapper -->

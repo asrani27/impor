@@ -40,11 +40,15 @@
                         @foreach ($data as $key => $item)
                         <tr>
                             <td>{{$no++}}</td>
-                            <td>{{$item->tanggal}}</td>
+                            <td>{{\Carbon\Carbon::parse($item->tanggal)->format('d M Y')}}</td>
                             <td>{{$item->nota}}</td>
                             <td>{{$item->nama_pelanggan}}</td>
-                            <td></td>
-                            <td>{{$item->total}}</td>
+                            <td>
+                                @foreach ($item->penjualandetail as $detail)
+                                <li>{{$detail->barang->nama}}, Jumlah : {{$detail->jumlah}}</li>
+                                @endforeach
+                            </td>
+                            <td>{{number_format($item->total)}}</td>
                             <td>
 
                                 <a href="/penjualan/toko/{{$toko->id}}/detail/{{$item->id}}"
