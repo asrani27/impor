@@ -26,16 +26,16 @@ EDIT HARGA BARANG
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Toko</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="toko" value="{{$data->toko->nama}}"
-                                        readonly>
+                                    <input type="text" class="form-control" name="toko"
+                                        value="{{$data == null ? $toko->nama:$data->toko->nama}}" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Nama Barang</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="nama" value="{{$data->barang->nama}}"
-                                        readonly>
+                                    <input type="text" class="form-control" name="nama"
+                                        value="{{$data == null ? $barang->nama:$data->barang->nama}}" readonly>
                                 </div>
                             </div>
 
@@ -44,7 +44,7 @@ EDIT HARGA BARANG
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="harga"
                                         onkeypress="return hanyaAngka(event)"
-                                        value="{{$data->harga == null ? 0: $data->harga}}" required>
+                                        value="{{$data == null ? 0: $data->harga}}" required>
                                 </div>
                             </div>
                             <div class="form-group row">

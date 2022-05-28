@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Toko;
+use App\Models\Barang;
 use App\Models\BarangToko;
 use Illuminate\Http\Request;
 
@@ -77,14 +78,27 @@ class TokoController extends Controller
     public function editharga($barang_id, $toko_id)
     {
         $data = BarangToko::where('barang_id', $barang_id)->where('toko_id', $toko_id)->first();
-        return view('superadmin.toko.editharga', compact('barang_id', 'toko_id', 'data'));
+        $barang = Barang::find($barang_id);
+        $toko = Toko::find($toko_id);
+        return view('superadmin.toko.editharga', compact('barang_id', 'toko_id', 'data', 'barang', 'toko'));
     }
 
     public function updateharga(Request $req, $barang_id, $toko_id)
     {
-        $data = BarangToko::where('barang_id', $barang_id)->where('toko_id', $toko_id)->first()->update([
-            'harga' => $req->harga
-        ]);
+        $update = BarangToko::where('barang_id', $barang_id)->where('toko_id', $toko_id)->first();
+        if ($update == null) {
+            //simpan
+            $n = new BarangToko;
+            $n->barang_id = $barang_id;
+            $n->toko_id = $toko_id;
+            $n->harga = $req->harga;
+            $n->save();
+        } else {
+            //update
+            $update->update([
+                'harga' => $req->harga
+            ]);
+        }
 
         toastr()->success('Berhasil dupdate');
         return redirect('/toko/barang/' . $toko_id);

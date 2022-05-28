@@ -43,7 +43,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar  sidebar-light-lightblue elevation-4">
-      <a href="#" class="brand-link navbar-lightblue" style="background-color: #2969b0 !important;">
+      <a href="#" class="brand-link navbar-lightblue" style="
+      background-color: #0954a9 !important;">
         <span class="brand-text font-weight-light text-white text-CENTER">
           INVENTORY STOCK
         </span>
