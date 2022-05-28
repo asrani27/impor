@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Toko</title>
+    <title>Toko Raja Pancing</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="#" class="navbar-brand">
                     <img src="/admin/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                         style="opacity: .8">
-                    <span class="brand-text font-weight-light text-white"><b>TOKO</b></span>
+                    <span class="brand-text font-weight-light text-white"><b>TOKO RAJA PANCING</b></span>
                 </a>
 
                 <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
