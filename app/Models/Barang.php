@@ -19,6 +19,6 @@ class Barang extends Model
 
     public function toko()
     {
-        return $this->belongsToMany(Toko::class, 'barang_toko', 'barang_id', 'toko_id');
+        return $this->belongsToMany(Toko::class, 'barang_toko', 'barang_id', 'toko_id')->withPivot('harga');
     }
 }

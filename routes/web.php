@@ -7,6 +7,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PenjualanController;
 
 Route::get('/', [LoginController::class, 'showlogin']);
@@ -42,4 +43,10 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
 
     Route::get('/penjualan', [PenjualanController::class, 'penjualan']);
+    Route::get('/penjualan/toko/{id}', [PenjualanController::class, 'penjualantoko']);
+    Route::get('/penjualan/toko/{id}/create', [PenjualanController::class, 'transaksi']);
+    Route::post('/penjualan/toko/{id}/create', [PenjualanController::class, 'transaksisimpan']);
+    Route::get('/penjualan/toko/{id}/batal', [PenjualanController::class, 'transaksibatal']);
+
+    Route::get('/keranjang/delete/{id}', [KeranjangController::class, 'delete']);
 });
