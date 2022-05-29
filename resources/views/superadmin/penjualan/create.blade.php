@@ -49,7 +49,7 @@
                             <option value="">-Pilih Barang-</option>
                             @foreach ($barang as $item)
                             <option value="{{$item->id}}">{{$item->nama}}, Stok: {{$item->stok}}, Rp.
-                                {{number_format($item->harga)}}</option>
+                                {{number_format($item->harga_jual)}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -67,6 +67,8 @@
                                 <th>Kode</th>
                                 <th>Nama Barang</th>
                                 <th>Harga</th>
+                                <th>Diskon</th>
+                                <th>Harga Final</th>
                                 <th>Jumlah</th>
                                 <th>Total</th>
                                 <th>#</th>
@@ -79,6 +81,8 @@
                                 <td>{{$item->barang == null ? '' :$item->barang->kode}}</td>
                                 <td>{{$item->barang == null ? '' :$item->barang->nama}}</td>
                                 <td>Rp. {{number_format($item->harga)}}</td>
+                                <td>{{round($item->diskon, 2)}} %</td>
+                                <td>Rp. {{number_format($item->harga_jual)}}</td>
                                 <td>Rp. {{number_format($item->jumlah)}}</td>
                                 <td>Rp. {{number_format($item->total)}}</td>
                                 <td><a href="/keranjang/delete/{{$item->id}}"

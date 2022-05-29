@@ -33,7 +33,7 @@ class PenjualanController extends Controller
         })->get();
 
         $barang->map(function ($item) use ($id) {
-            $item->harga = BarangToko::where('barang_id', $item->id)->where('toko_id', $id)->first()->harga;
+            $item->harga_jual = BarangToko::where('barang_id', $item->id)->where('toko_id', $id)->first()->harga_jual;
             return $item;
         });
 
@@ -67,22 +67,26 @@ class PenjualanController extends Controller
                 return back();
             }
 
-            $harga = BarangToko::where('barang_id', $req->barang_id)->where('toko_id', $id)->first()->harga;
+            $barang = BarangToko::where('barang_id', $req->barang_id)->where('toko_id', $id)->first();
             $checkKeranjang = Keranjang::where('toko_id', $id)->where('barang_id', $req->barang_id)->first();
 
             if ($checkKeranjang == null) {
                 $s = new Keranjang;
-                $s->barang_id = $req->barang_id;
-                $s->harga     = $harga;
+                $s->barang_id       = $req->barang_id;
+                $s->harga           = $barang->harga;
+                $s->diskon          = $barang->diskon;
+                $s->harga_jual      = $barang->harga_jual;
                 $s->jumlah    = $req->jumlah;
-                $s->total     = $harga * $req->jumlah;
+                $s->total     = $barang->harga_jual * $req->jumlah;
                 $s->toko_id   = $id;
                 $s->save();
             } else {
                 $update = $checkKeranjang;
-                $update->harga     = $harga;
-                $update->jumlah    = $req->jumlah;
-                $update->total     = $harga * $req->jumlah;
+                $update->harga          = $barang->harga;
+                $update->diskon         = $barang->diskon;
+                $update->harga_jual     = $barang->harga_jual;
+                $update->jumlah         = $req->jumlah;
+                $update->total          = $barang->harga_jual * $req->jumlah;
                 $update->save();
             }
             $req->flash();
@@ -124,6 +128,8 @@ class PenjualanController extends Controller
                     $pd->penjualan_id   = $n->id;
                     $pd->barang_id      = $item->barang_id;
                     $pd->harga          = $item->harga;
+                    $pd->diskon         = $item->diskon;
+                    $pd->harga_jual     = $item->harga_jual;
                     $pd->jumlah         = $item->jumlah;
                     $pd->total          = $item->harga * $item->jumlah;
                     $pd->toko_id        = $id;
