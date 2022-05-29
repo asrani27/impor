@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\BarangToko;
 use Illuminate\Console\Command;
 
 class Diskon extends Command
