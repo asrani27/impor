@@ -85,7 +85,7 @@ class TokoController extends Controller
 
     public function updateharga(Request $req, $barang_id, $toko_id)
     {
-        dd($req->all(), str_replace(',', '', $req->harga));
+
         $c_harga = str_replace(',', '', $req->harga);
         $c_harga_modal = str_replace(',', '', $req->harga_modal);
         $update = BarangToko::where('barang_id', $barang_id)->where('toko_id', $toko_id)->first();

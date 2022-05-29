@@ -51,7 +51,7 @@ EDIT HARGA BARANG
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Harga Jual</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="formattedNumberField" name="harga"
+                                    <input type="text" class="form-control" name="harga"
                                         onkeypress="return hanyaAngka(event)"
                                         value="{{($data == null ? 0: $data->harga) == null ? 0: $data->harga}}"
                                         required>
@@ -87,12 +87,6 @@ EDIT HARGA BARANG
 @push('js')
 
 <script>
-    var fnf = document.getElementById("formattedNumberField");
-fnf.addEventListener('keyup', function(evt){
-    var n = parseInt(this.value.replace(/\D/g,''),10);
-    fnf.value = n.toLocaleString();
-}, false);
-
     function hanyaAngka(evt) {
       var charCode = (evt.which) ? evt.which : event.keyCode
        if (charCode > 31 && (charCode < 48 || charCode > 57))
@@ -101,4 +95,5 @@ fnf.addEventListener('keyup', function(evt){
       return true;
     }
 </script>
+
 @endpush
