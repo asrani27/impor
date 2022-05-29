@@ -40,11 +40,31 @@ EDIT HARGA BARANG
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Harga Barang</label>
+                                <label class="col-sm-2 col-form-label">Harga Modal</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="harga_modal"
+                                        onkeypress="return hanyaAngka(event)"
+                                        value="{{($data == null ? 0: $data->harga_modal) == null ? 0: $data->harga_modal}}"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Harga Jual</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="harga"
                                         onkeypress="return hanyaAngka(event)"
-                                        value="{{$data == null ? 0: $data->harga}}" required>
+                                        value="{{($data == null ? 0: $data->harga) == null ? 0: $data->harga}}"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Diskon</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="diskon"
+                                        onkeypress="return hanyaAngka(event)"
+                                        value="{{($data == null ? 0: $data->diskon) == null ? 0: $data->diskon}}"
+                                        required>
                                 </div>
                             </div>
                             <div class="form-group row">

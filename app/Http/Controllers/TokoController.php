@@ -92,11 +92,17 @@ class TokoController extends Controller
             $n->barang_id = $barang_id;
             $n->toko_id = $toko_id;
             $n->harga = $req->harga;
+            $n->harga_modal = $req->harga_modal;
+            $n->diskon = $req->diskon;
+            $n->harga_jual = $req->harga - ($req->harga * ($req->diskon / 100));
             $n->save();
         } else {
             //update
             $update->update([
-                'harga' => $req->harga
+                'harga' => $req->harga,
+                'diskon' => $req->diskon,
+                'harga_modal' => $req->harga_modal,
+                'harga_jual' => $req->harga - ($req->harga * ($req->diskon / 100))
             ]);
         }
 
