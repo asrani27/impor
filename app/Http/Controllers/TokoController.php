@@ -85,24 +85,27 @@ class TokoController extends Controller
 
     public function updateharga(Request $req, $barang_id, $toko_id)
     {
+        dd($req->all(), str_replace(',', '', $req->harga));
+        $c_harga = str_replace(',', '', $req->harga);
+        $c_harga_modal = str_replace(',', '', $req->harga_modal);
         $update = BarangToko::where('barang_id', $barang_id)->where('toko_id', $toko_id)->first();
         if ($update == null) {
             //simpan
             $n = new BarangToko;
             $n->barang_id = $barang_id;
             $n->toko_id = $toko_id;
-            $n->harga = $req->harga;
-            $n->harga_modal = $req->harga_modal;
+            $n->harga = $c_harga;
+            $n->harga_modal = $c_harga_modal;
             $n->diskon = $req->diskon;
-            $n->harga_jual = $req->harga - ($req->harga * ($req->diskon / 100));
+            $n->harga_jual = $c_harga - ($c_harga * ($req->diskon / 100));
             $n->save();
         } else {
             //update
             $update->update([
-                'harga' => $req->harga,
+                'harga' => $c_harga,
                 'diskon' => $req->diskon,
-                'harga_modal' => $req->harga_modal,
-                'harga_jual' => $req->harga - ($req->harga * ($req->diskon / 100))
+                'harga_modal' => $c_harga_modal,
+                'harga_jual' => $c_harga - ($c_harga * ($req->diskon / 100))
             ]);
         }
 
