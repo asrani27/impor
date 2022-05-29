@@ -47,7 +47,7 @@
                             <td>{{$item->stok}}</td>
                             <td>{{number_format($item->harga_modal)}}</td>
                             <td>{{number_format($item->harga)}}</td>
-                            <td>{{number_format($item->diskon)}}</td>
+                            <td>{{$item->diskon}} %</td>
                             <td>{{number_format($item->harga_jual)}}</td>
                             <td>
 

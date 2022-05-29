@@ -49,6 +49,15 @@ EDIT HARGA BARANG
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Harga Grosir</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="harga_grosir"
+                                        onkeypress="return hanyaAngka(event)"
+                                        value="{{($data == null ? 0: $data->harga_grosir) == null ? 0: $data->harga_grosir}}"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Harga Jual</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="harga"
@@ -59,11 +68,11 @@ EDIT HARGA BARANG
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Diskon</label>
+                                <label class="col-sm-2 col-form-label">Harga Final</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="diskon"
+                                    <input type="text" class="form-control" name="harga_jual"
                                         onkeypress="return hanyaAngka(event)"
-                                        value="{{($data == null ? 0: $data->diskon) == null ? 0: $data->diskon}}"
+                                        value="{{($data == null ? 0: $data->harga_jual) == null ? 0: $data->harga_jual}}"
                                         required>
                                 </div>
                             </div>

@@ -86,9 +86,15 @@ class TokoController extends Controller
     public function updateharga(Request $req, $barang_id, $toko_id)
     {
 
-        $c_harga = str_replace(',', '', $req->harga);
-        $c_harga_modal = str_replace(',', '', $req->harga_modal);
+        $c_harga = (int)str_replace(',', '', $req->harga);
+        $c_harga_modal = (int)str_replace(',', '', $req->harga_modal);
+        $c_harga_grosir = (int)str_replace(',', '', $req->harga_grosir);
+        $c_harga_jual = (int)str_replace(',', '', $req->harga_jual);
+
+        $diskon = ((($c_harga - $c_harga_jual) / $c_harga) * 100);
+
         $update = BarangToko::where('barang_id', $barang_id)->where('toko_id', $toko_id)->first();
+
         if ($update == null) {
             //simpan
             $n = new BarangToko;
@@ -96,16 +102,18 @@ class TokoController extends Controller
             $n->toko_id = $toko_id;
             $n->harga = $c_harga;
             $n->harga_modal = $c_harga_modal;
-            $n->diskon = $req->diskon;
-            $n->harga_jual = $c_harga - ($c_harga * ($req->diskon / 100));
+            $n->harga_grosir = $c_harga_grosir;
+            $n->diskon = $diskon;
+            $n->harga_jual = $c_harga_jual;
             $n->save();
         } else {
             //update
             $update->update([
                 'harga' => $c_harga,
-                'diskon' => $req->diskon,
+                'diskon' => $diskon,
                 'harga_modal' => $c_harga_modal,
-                'harga_jual' => $c_harga - ($c_harga * ($req->diskon / 100))
+                'harga_grosir' => $c_harga_grosir,
+                'harga_jual' => $c_harga_jual,
             ]);
         }
 
