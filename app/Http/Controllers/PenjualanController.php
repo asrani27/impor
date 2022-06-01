@@ -131,7 +131,7 @@ class PenjualanController extends Controller
                     $pd->diskon         = $item->diskon;
                     $pd->harga_jual     = $item->harga_jual;
                     $pd->jumlah         = $item->jumlah;
-                    $pd->total          = $item->harga * $item->jumlah;
+                    $pd->total          = $item->harga_jual * $item->jumlah;
                     $pd->toko_id        = $id;
                     $pd->save();
 
@@ -177,5 +177,11 @@ class PenjualanController extends Controller
         $pj->delete();
         toastr()->success('Transaksi Di Hapus');
         return back();
+    }
+
+    public function transaksiprint($id, $penjualan_id)
+    {
+        $pj = Penjualan::find($penjualan_id);
+        return view('superadmin.penjualan.print', compact('pj'));
     }
 }

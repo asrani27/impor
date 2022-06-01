@@ -101,7 +101,7 @@
                                 <th>Total</th>
                                 <th>Rp. {{number_format($keranjang->sum('total'))}}</th>
                                 <td>
-                                    <input type="hidden" name="total" value="{{$keranjang->sum('harga')}}">
+                                    <input type="hidden" name="total" value="{{$keranjang->sum('total')}}">
                                 </td>
                             </tr>
                         </tfoot>
