@@ -24,7 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             style="background-color: #2969b0 !important; background-image:linear-gradient(to right , #0954a9, #0785a9, #4db1a5, #2ba79f)">
             <div class="container">
                 <a href="#" class="navbar-brand">
-                    <img src="/admin/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    <img src="/admin/logopng.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                         style="opacity: .8">
                     <span class="brand-text font-weight-light text-white"><b>TOKO RAJA PANCING</b></span>
                 </a>
@@ -63,8 +63,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="col-lg-4">
 
                             <div class="text-center">
-                                <img src="/admin/logo.png" alt="AdminLTE Logo" width="100px">
+                                <img src="/admin/logopng.jpg" alt="AdminLTE Logo" width="100px">
                             </div>
+                            <br />
                             <div class="card">
                                 <div class="card-body">
                                     <form action="/login" method="post">
