@@ -164,4 +164,18 @@ class PenjualanController extends Controller
         toastr()->success('Transaksi Di batalkan');
         return back();
     }
+
+    public function transaksidelete($id, $penjualan_id)
+    {
+        $pj = Penjualan::find($penjualan_id);
+        $detail = $pj->penjualandetail;
+        foreach ($detail as $barang) {
+            $data = Barang::find($barang->barang_id);
+            $data->stok = $data->stok + $barang->jumlah;
+            $data->save();
+        }
+        $pj->delete();
+        toastr()->success('Transaksi Di Hapus');
+        return back();
+    }
 }

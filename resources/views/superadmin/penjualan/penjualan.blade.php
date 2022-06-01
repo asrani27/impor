@@ -51,7 +51,8 @@
                             <td>{{number_format($item->total)}}</td>
                             <td>
 
-                                <a href="/penjualan/toko/{{$toko->id}}/detail/{{$item->id}}"
+                                <a href="/penjualan/toko/{{$toko->id}}/delete/{{$item->id}}"
+                                    onclick="return confirm('Stok barang akan dikembalikan?');"
                                     class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</a>
 
                             </td>
