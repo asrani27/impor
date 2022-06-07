@@ -28,9 +28,8 @@
                             <th>Satuan</th>
                             <th>Stok</th>
                             <th>Harga Modal</th>
+                            <th>Harga Grosir</th>
                             <th>Harga Jual</th>
-                            <th>Diskon</th>
-                            <th>Harga Final</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -46,9 +45,8 @@
                             <td>{{$item->satuan->nama}}</td>
                             <td>{{$item->stok}}</td>
                             <td>{{number_format($item->harga_modal)}}</td>
+                            <td>{{number_format($item->harga_grosir)}}</td>
                             <td>{{number_format($item->harga)}}</td>
-                            <td>{{round($item->diskon, 2)}} %</td>
-                            <td>{{number_format($item->harga_jual)}}</td>
                             <td>
 
                                 <a href="/toko/barang/editharga/{{$item->id}}/{{$id}}" class="btn btn-xs btn-success"><i

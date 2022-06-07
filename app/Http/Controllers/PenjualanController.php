@@ -33,7 +33,7 @@ class PenjualanController extends Controller
         })->get();
 
         $barang->map(function ($item) use ($id) {
-            $item->harga_jual = BarangToko::where('barang_id', $item->id)->where('toko_id', $id)->first()->harga_jual;
+            $item->harga = BarangToko::where('barang_id', $item->id)->where('toko_id', $id)->first()->harga;
             return $item;
         });
 
@@ -75,18 +75,18 @@ class PenjualanController extends Controller
                 $s->barang_id       = $req->barang_id;
                 $s->harga           = $barang->harga;
                 $s->diskon          = $barang->diskon;
-                $s->harga_jual      = $barang->harga_jual;
+                $s->harga_jual      = $barang->harga;
                 $s->jumlah    = $req->jumlah;
-                $s->total     = $barang->harga_jual * $req->jumlah;
+                $s->total     = $barang->harga * $req->jumlah;
                 $s->toko_id   = $id;
                 $s->save();
             } else {
                 $update = $checkKeranjang;
                 $update->harga          = $barang->harga;
                 $update->diskon         = $barang->diskon;
-                $update->harga_jual     = $barang->harga_jual;
+                $update->harga_jual     = $barang->harga;
                 $update->jumlah         = $req->jumlah;
-                $update->total          = $barang->harga_jual * $req->jumlah;
+                $update->total          = $barang->harga * $req->jumlah;
                 $update->save();
             }
             $req->flash();

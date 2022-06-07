@@ -51,4 +51,5 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('/penjualan/toko/{id}/print/{penjualan_id}', [PenjualanController::class, 'transaksiprint']);
 
     Route::get('/keranjang/delete/{id}', [KeranjangController::class, 'delete']);
+    Route::post('/keranjang/editharga', [KeranjangController::class, 'updateHarga']);
 });

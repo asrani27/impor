@@ -20,6 +20,7 @@ function barangToko($id)
         $harga = BarangToko::where('barang_id', $item->id)->where('toko_id', $id)->first();
         $item->harga = $harga == null ? 0 : $harga->harga;
         $item->harga_modal = $harga == null ? 0 : $harga->harga_modal;
+        $item->harga_grosir = $harga == null ? 0 : $harga->harga_grosir;
         $item->diskon = $harga == null ? 0 : $harga->diskon;
         $item->harga_jual = $harga == null ? 0 : $harga->harga_jual;
         return $item;

@@ -12,4 +12,18 @@ class KeranjangController extends Controller
         Keranjang::find($id)->delete();
         return back();
     }
+
+    public function updateHarga(Request $req)
+    {
+        $data = Keranjang::find($req->keranjang_id);
+        $diskon = ((($data->harga - $req->harga_jual) / $data->harga) * 100);
+
+        $update = $data;
+        $update->diskon = $diskon;
+        $update->harga_jual = $req->harga_jual;
+        $update->total = $req->harga_jual * $data->jumlah;
+        $update->save();
+        toastr()->success('Harga Di update');
+        return back();
+    }
 }

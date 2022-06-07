@@ -49,7 +49,7 @@
                             <option value="">-Pilih Barang-</option>
                             @foreach ($barang as $item)
                             <option value="{{$item->id}}">{{$item->nama}}, Stok: {{$item->stok}}, Rp.
-                                {{number_format($item->harga_jual)}}</option>
+                                {{number_format($item->harga)}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -60,9 +60,12 @@
                     <button type="submit" class="btn btn-block btn-primary" name="button" value="keranjang"><i
                             class="fa fa-shopping-cart"></i>
                         Tambah Ke Keranjang</button><br />
+                </div>
+
+                <div class="card-body table-responsive p-0">
                     <table id="example1" class="table table-bordered table-striped table-sm">
                         <thead>
-                            <tr>
+                            <tr style="border-top: 1px solid #dee2e6;">
                                 <th>No</th>
                                 <th>Kode</th>
                                 <th>Nama Barang</th>
@@ -82,8 +85,12 @@
                                 <td>{{$item->barang == null ? '' :$item->barang->nama}}</td>
                                 <td>Rp. {{number_format($item->harga)}}</td>
                                 <td>{{round($item->diskon, 2)}} %</td>
-                                <td>Rp. {{number_format($item->harga_jual)}}</td>
-                                <td>Rp. {{number_format($item->jumlah)}}</td>
+                                <td>Rp. {{number_format($item->harga_jual)}}
+                                    <a href="#"><i class="fa fa-edit text-primary edit-harga" data-id="{{$item->id}}"
+                                            data-nama="{{$item->barang->nama}}"
+                                            data-harga="{{$item->harga_jual}}"></i></a>
+                                </td>
+                                <td>{{number_format($item->jumlah)}}</td>
                                 <td>Rp. {{number_format($item->total)}}</td>
                                 <td><a href="/keranjang/delete/{{$item->id}}"
                                         onclick="return confirm('Yakin ingin dihapus?');"><i
@@ -94,6 +101,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -119,8 +128,49 @@
     </div>
 </form>
 
+<div class="modal fade" id="modal-edit" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/keranjang/editharga" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header bg-gradient-primary" style="padding:10px">
+                    <h4 class="modal-title text-sm">EDIT HARGA FINAL</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nama Barang</label>
+                        <input type="text" class="form-control" id="nama_barang" name="nama" readonly>
+                        <input type="hidden" class="form-control" id="keranjang_id" name="keranjang_id">
+                    </div>
+                    <div class="form-group">
+                        <label>Harga Final</label>
+                        <input type="text" class="form-control" id="harga_jual" name="harga_jual"
+                            onkeypress="return hanyaAngka(event)">
+                    </div>
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <button type="submit" class="btn btn-block btn-primary"><i class="fas fa-paper-plane"></i>
+                        Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @push('js')
+<script>
+    $(document).on('click', '.edit-harga', function() {
+   $('#keranjang_id').val($(this).data('id'));
+   $('#nama_barang').val($(this).data('nama'));
+   $('#harga_jual').val($(this).data('harga'));
+   $("#modal-edit").modal();
+});
+</script>
 <script>
     $(function () {
       //Initialize Select2 Elements
