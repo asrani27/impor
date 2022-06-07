@@ -89,9 +89,9 @@ class TokoController extends Controller
         $c_harga = (int)str_replace(',', '', $req->harga);
         $c_harga_modal = (int)str_replace(',', '', $req->harga_modal);
         $c_harga_grosir = (int)str_replace(',', '', $req->harga_grosir);
-        $c_harga_jual = (int)str_replace(',', '', $req->harga_jual);
+        $c_harga_jual = (int)str_replace(',', '', $req->harga);
 
-        $diskon = ((($c_harga - $c_harga_jual) / $c_harga) * 100);
+        $diskon = ((($c_harga - $c_harga) / $c_harga) * 100);
 
         $update = BarangToko::where('barang_id', $barang_id)->where('toko_id', $toko_id)->first();
 

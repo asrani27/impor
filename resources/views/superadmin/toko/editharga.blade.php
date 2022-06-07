@@ -68,9 +68,9 @@ EDIT HARGA BARANG
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Harga Final</label>
+                                {{-- <label class="col-sm-2 col-form-label">Harga Final</label> --}}
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="harga_jual"
+                                    <input type="hidden" class="form-control" name="harga_jual"
                                         onkeypress="return hanyaAngka(event)"
                                         value="{{($data == null ? 0: $data->harga_jual) == null ? 0: $data->harga_jual}}"
                                         required>
