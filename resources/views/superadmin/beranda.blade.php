@@ -31,7 +31,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>0</h3>
+                <h3>{{$stok}}</h3>
 
                 <p>Stok</p>
             </div>
@@ -45,7 +45,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>Rp. 0<sup style="font-size: 20px"></sup></h3>
+                <h3>Rp. {{number_format($penjualan)}}<sup style="font-size: 20px"></sup></h3>
 
                 <p>Penjualan Bulan Ini</p>
             </div>
@@ -60,9 +60,9 @@
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>0 </h3>
+                <h3>{{$st}} </h3>
 
-                <p>Stok Terjual</p>
+                <p>Stok Terjual Bulan ini</p>
             </div>
             <div class="icon"><i class="fas fa-shopping-cart"></i>
             </div>
