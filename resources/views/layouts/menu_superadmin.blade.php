@@ -41,6 +41,14 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="/laporan" class="nav-link {{Request::is('laporan*') ? 'active' : ''}}">
+                <i class="nav-icon fas fa-list"></i>
+                <p>
+                    Laporan
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="/logout" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>

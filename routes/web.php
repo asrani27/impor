@@ -7,6 +7,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PenjualanController;
 
@@ -52,4 +53,6 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
     Route::get('/keranjang/delete/{id}', [KeranjangController::class, 'delete']);
     Route::post('/keranjang/editharga', [KeranjangController::class, 'updateHarga']);
+    Route::get('/laporan', [LaporanController::class, 'index']);
+    Route::post('/laporan', [LaporanController::class, 'pdf']);
 });
