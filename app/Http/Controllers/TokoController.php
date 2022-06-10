@@ -103,7 +103,7 @@ class TokoController extends Controller
             $n->harga = $c_harga;
             $n->harga_modal = $c_harga_modal;
             $n->harga_grosir = $c_harga_grosir;
-            $n->harga_jual = $c_harga_jual;
+            //$n->harga_jual = $c_harga_jual;
             $n->save();
         } else {
             //update
@@ -112,7 +112,6 @@ class TokoController extends Controller
                 'diskon' => $diskon,
                 'harga_modal' => $c_harga_modal,
                 'harga_grosir' => $c_harga_grosir,
-                'harga_jual' => $c_harga_jual,
             ]);
         }
 
