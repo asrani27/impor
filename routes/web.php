@@ -11,7 +11,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PenjualanController;
 
-Route::get('/', [LoginController::class, 'showlogin']);
+Route::get('/', [LoginController::class, 'showlogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
