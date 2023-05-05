@@ -10,7 +10,7 @@ TAMBAH BARANG
 <br />
 <div class="row">
     <div class="col-12">
-        <form method="post" action="/barang/create">
+        <form method="post" action="/barang/create" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-12 col-12">
@@ -54,6 +54,14 @@ TAMBAH BARANG
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="stok" required
                                         onkeypress="return hanyaAngka(event)">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">File</label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" name="file" required
+                                        >
                                 </div>
                             </div>
                             <div class="form-group row">

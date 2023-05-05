@@ -10,7 +10,7 @@ EDIT BARANG
 <br />
 <div class="row">
     <div class="col-12">
-        <form method="post" action="/barang/edit/{{$data->id}}">
+        <form method="post" action="/barang/edit/{{$data->id}}" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-12 col-12">
@@ -57,6 +57,14 @@ EDIT BARANG
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="stok" value="{{$data->stok}}" required
                                         onkeypress="return hanyaAngka(event)">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">File</label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" name="file">
+                                    
+                                    <img src="/storage/compress/{{$data->file}}" width="50px">
                                 </div>
                             </div>
                             <div class="form-group row">

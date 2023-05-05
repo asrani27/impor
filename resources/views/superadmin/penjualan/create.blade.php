@@ -45,10 +45,10 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <select name="barang_id" class="form-control form-control select2">
+                        <select id="id_select2_example" name="barang_id" class="form-control select2">
                             <option value="">-Pilih Barang-</option>
                             @foreach ($barang as $item)
-                            <option value="{{$item->id}}">{{$item->nama}}, Stok: {{$item->stok}}, Rp.
+                            <option value="{{$item->id}}"><img src="/storage/compress/{{$item->file}}" >{{$item->nama}}, Stok: {{$item->stok}}, Rp.
                                 {{number_format($item->harga)}}</option>
                             @endforeach
                         </select>
@@ -67,6 +67,7 @@
                         <thead>
                             <tr style="border-top: 1px solid #dee2e6;">
                                 <th>No</th>
+                                <th>Gambar</th>
                                 <th>Kode</th>
                                 <th>Nama Barang</th>
                                 <th>Harga</th>
@@ -81,6 +82,7 @@
                             @foreach ($keranjang as $key => $item)
                             <tr>
                                 <td>{{$key + 1}}</td>
+                                <td><img src="/storage/compress/{{$item->file}}" width="40px"></td>
                                 <td>{{$item->barang == null ? '' :$item->barang->kode}}</td>
                                 <td>{{$item->barang == null ? '' :$item->barang->nama}}</td>
                                 <td>Rp. {{number_format($item->harga)}}</td>
@@ -156,6 +158,7 @@
                 <div class="modal-footer justify-content-between">
                     <button type="submit" class="btn btn-block btn-primary"><i class="fas fa-paper-plane"></i>
                         Update</button>
+
                 </div>
             </form>
         </div>
@@ -163,6 +166,25 @@
 </div>
 @endsection
 @push('js')
+
+<script src="/admin/plugins/select2/js/select2.full.min.js">
+</script>
+<script>
+  function formatState (state) {
+  if (!state.id) {
+    return state.text;
+  }
+  var baseUrl = "/user/pages/images/flags";
+  var $state = $(
+    '<span><img src="https://data.world/api/datadotworld-apps/dataset/python/file/raw/logo.png" class="img-flag" /> ' + state.text + '</span>'
+  );
+  return $state;
+};
+
+$("#id_select2_example").select2({
+  templateResult: formatState
+});
+</script>
 <script>
     $(document).on('click', '.edit-harga', function() {
    $('#keranjang_id').val($(this).data('id'));
@@ -183,8 +205,6 @@
     });
 </script>
 
-<script src="/admin/plugins/select2/js/select2.full.min.js">
-</script>
 <script>
     function hanyaAngka(evt) {
       var charCode = (evt.which) ? evt.which : event.keyCode
