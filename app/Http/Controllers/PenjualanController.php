@@ -151,7 +151,7 @@ class PenjualanController extends Controller
                 return redirect('/penjualan/toko/' . $id);
                 // all good
             } catch (\Exception $e) {
-                dd($e);
+                //dd($e);
                 DB::rollback();
                 toastr()->error($e);
                 return back();
