@@ -22,8 +22,10 @@ class LaporanController extends Controller
             $data->map(function ($item, $value) {
                 $item->total_modal = $item->penjualandetail->sum('harga_beli');
                 $item->laba = $item->total - $item->total_modal;
+                $item->barang = $item->penjualandetail;
                 return $item;
             });
+
             $pdf = PDF::loadView('superadmin.laporan.pdf_penjualan', compact('bulan', 'tahun', 'data'))->setPaper('legal');
             return $pdf->stream();
         } else {
@@ -35,7 +37,7 @@ class LaporanController extends Controller
                 $item->laba = $item->total - $item->total_modal;
                 return $item;
             });
-            
+
             $pdf = PDF::loadView('superadmin.laporan.detail_penjualan', compact('bulan', 'tahun', 'data'))->setPaper('legal');
             return $pdf->stream();
         }

@@ -107,8 +107,17 @@
                     <td>{{\Carbon\Carbon::parse($item->tanggal)->format('d-m-Y')}}</td>
                     <td>{{$item->nota}}</td>
                     <td>{{$item->toko->nama}}</td>
-                    <td>{{number_format($item->total_modal)}}</td>
-                    <td>{{number_format($item->total)}}</td>
+                    <td>
+                        @foreach ($item->barang as $barang)
+
+                        {{$barang == null ? '-' : $barang->barang->nama}} : 
+                        {{$barang == null ? '-' : number_format($barang->harga_beli)}}
+                        <br/>
+                        @endforeach
+                    Total :{{number_format($item->total_modal)}}</td>
+                    <td>
+                        
+                        {{number_format($item->total)}}</td>
                     <td>{{number_format($item->laba)}}</td>
                 </tr>
                 @endforeach
