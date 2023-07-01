@@ -151,6 +151,7 @@ class PenjualanController extends Controller
                 return redirect('/penjualan/toko/' . $id);
                 // all good
             } catch (\Exception $e) {
+                dd($e);
                 DB::rollback();
                 toastr()->error($e);
                 return back();
@@ -185,7 +186,7 @@ class PenjualanController extends Controller
     public function transaksiprint($id, $penjualan_id)
     {
         $pj = Penjualan::find($penjualan_id);
-        
+
         return view('superadmin.penjualan.print', compact('pj'));
     }
 }
