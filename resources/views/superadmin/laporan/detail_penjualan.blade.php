@@ -92,6 +92,7 @@
                     <th>Tanggal</th>
                     <th>Nota</th>
                     <th>Toko</th>
+                    <th>Detail Barang</th>
                     <th>Total Modal</th>
                     <th>Total Jual</th>
                     <th>Laba</th>

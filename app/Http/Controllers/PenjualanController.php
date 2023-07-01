@@ -79,6 +79,7 @@ class PenjualanController extends Controller
                 $s->jumlah    = $req->jumlah;
                 $s->total     = $barang->harga * $req->jumlah;
                 $s->toko_id   = $id;
+                $s->harga_beli = $barang->harga_modal;
                 $s->save();
             } else {
                 $update = $checkKeranjang;
@@ -87,6 +88,7 @@ class PenjualanController extends Controller
                 $update->harga_jual     = $barang->harga;
                 $update->jumlah         = $req->jumlah;
                 $update->total          = $barang->harga * $req->jumlah;
+                $update->harga_beli = $barang->harga_modal;
                 $update->save();
             }
             $req->flash();
@@ -132,6 +134,7 @@ class PenjualanController extends Controller
                     $pd->harga_jual     = $item->harga_jual;
                     $pd->jumlah         = $item->jumlah;
                     $pd->total          = $item->harga_jual * $item->jumlah;
+                    $pd->harga_beli     = $item->harga_beli;
                     $pd->toko_id        = $id;
                     $pd->save();
 
@@ -182,6 +185,7 @@ class PenjualanController extends Controller
     public function transaksiprint($id, $penjualan_id)
     {
         $pj = Penjualan::find($penjualan_id);
+        
         return view('superadmin.penjualan.print', compact('pj'));
     }
 }

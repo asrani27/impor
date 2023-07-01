@@ -51,7 +51,8 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
-                            <button type="submit" class='btn btn-danger'>Export PDF</button>
+                            <button type="submit" class='btn btn-danger' name="button" value="export">Export PDF</button>
+                            {{-- <button type="submit" class='btn btn-primary' name="button" value="detail">Detail Penjualan</button> --}}
                         </div>
                     </div>
                 </form>
