@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Toko;
 use App\Models\Barang;
 use App\Models\Keranjang;
@@ -10,6 +11,8 @@ use App\Models\BarangToko;
 use Illuminate\Http\Request;
 use App\Models\PenjualanDetail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PenjualanController extends Controller
 {
@@ -186,7 +189,8 @@ class PenjualanController extends Controller
     public function transaksiprint($id, $penjualan_id)
     {
         $pj = Penjualan::find($penjualan_id);
-
-        return view('superadmin.penjualan.print', compact('pj'));
+        $pdf  = Pdf::loadView('superadmin.penjualan.print', compact('pj'));
+        $filename = Auth::user()->name . '-' . Carbon::now()->format('Y-m-d-H-i-s') . '.pdf';
+        return $pdf->stream($filename);
     }
 }

@@ -1,122 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Raja Pancing Invoice</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="/admin/dist/css/adminlte.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
-
 <body>
-    <div class="wrapper">
-        <!-- Main content -->
-        <section class="invoice">
-            <!-- title row -->
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="page-header">
-                        <i class="fas fa-globe"></i> Raja Pancing.
-                        <small class="float-right">Date:
-                            {{\Carbon\Carbon::parse($pj->tanggal)->format('d/m/Y')}}</small>
-                    </h2>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- info row -->
-            <div class="row invoice-info">
-                <div class="col-sm-4 invoice-col">
-                    Dari
-                    <address>
-                        <strong>Admin, Raja Pancing</strong><br>
-                    </address>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
-                    Kepada
-                    <address>
-                        <strong>{{$pj->nama_pelanggan}}</strong><br>
-                    </address>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
-                    <b>Invoice #{{$pj->nota}}</b><br>
-                    <br>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
+    <table width="100%">
+        <tr>
+            <td style="font-size:26px;font-weight:bold">RajaPancing.com</td>
+            <td style="font-size:24px;font-weight:bold;text-align:right">INVOICE</td>
+        </tr>
+        <br/>
+        <tr>
+            <td style="border:2px solid black; padding:10px;font-family:Arial, Helvetica, sans-serif" width="70%">
+                Toko Raja Pancing Banjarmasin<br/>
+                Alamat : 
+                Jl. Lingkar Dalam Selatan No.1,Rt 29 Rw 02, samping AL Madani Ruko 2 lantai
+                <br/>
+                Telp : 085387000596
+            </td>
+            <td style="border:2px solid black; vertical-align:top; padding:10px;font-family:Arial, Helvetica, sans-serif"">
+                No Invoice : {{$pj->nota}}<br/>
+                Tanggal : {{\Carbon\Carbon::parse($pj->tanggal)->format('d-M-Y')}}
+                Pelanggan : {{$pj->pelanggan}}
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <table width="100%" cellpadding="5" cellspacing="0">
+        <tr style="font-family:Arial, Helvetica, sans-serif; ">
+            <th style="border:2px solid black">PRODUK</th>
+            <th style="border:2px solid black">HARGA</th>
+            <th style="border:2px solid black">JUMLAH</th>
+            <th style="border:2px solid black">DISKON</th>
+            <th style="border:2px solid black">HARGA FINAL</th>
+            <th style="border:2px solid black">TOTAL</th>
+        </tr>
 
-            <!-- Table row -->
-            <div class="row">
-                <div class="col-12 table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>Produk</th>
-                                <th>Jumlah</th>
-                                <th>Harga</th>
-                                <th>Diskon</th>
-                                <th>Harga Final</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($pj->penjualandetail as $item)
-                            <tr>
-                                <td>{{$item->barang->nama}}</td>
-                                <td>{{$item->jumlah}}</td>
-                                <td>{{number_format($item->harga)}}</td>
-                                <td>{{round($item->diskon,2)}} %</td>
-                                <td>{{number_format($item->harga_jual)}}</td>
-                                <td>{{number_format($item->total)}}</td>
-
-                            </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-
-            <div class="row">
-                <!-- accepted payments column -->
-                <div class="col-6">
-
-                </div>
-                <!-- /.col -->
-                <div class="col-6">
-                    <p class="lead">Tanggal {{\Carbon\Carbon::parse($pj->tanggal)->format('d/m/Y')}}</p>
-
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr>
-                                <th>Total:</th>
-                                <td>Rp. {{number_format($pj->total)}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
+        @foreach ($pj->penjualandetail as $key=> $item)
+            
+        <tr style="font-family:Arial, Helvetica, sans-serif; ">
+            <td style="border:2px solid black">{{$item->barang->nama}}</td>
+            <td style="border:2px solid black;text-align:right">{{number_format($item->harga)}}</td>
+            <td style="border:2px solid black;text-align:center">{{number_format($item->jumlah)}}</td>
+            <td style="border:2px solid black;text-align:center">{{round($item->diskon,2)}} %</td>
+            <td style="border:2px solid black;text-align:center">{{number_format($item->harga_jual)}}</td>
+            <td style="border:2px solid black;text-align:right">{{number_format($item->total)}}</td>
+        </tr>
+        @endforeach
+        <tr style="font-family:Arial, Helvetica, sans-serif; ">
+            <td style="border:2px solid black" colspan="5">TOTAL</td>
+            <td style="border:2px solid black;text-align:right">{{number_format($pj->penjualandetail->sum('total'))}}</td>
+        </tr>
+    </table>
+    <br/>
+    <div style="text-align:center;font-family:Arial, Helvetica, sans-serif;font-size:12px">
+        <strong>TERIMA KASIH TELAH BERBELANJA <BR/>DI TOKO RAJA PANCING BANJARMASIN</strong>
     </div>
-    <!-- ./wrapper -->
-    <!-- Page specific script -->
-    <script>
-        window.addEventListener("load", window.print());
-    </script>
 </body>
-
 </html>
