@@ -189,8 +189,8 @@ class PenjualanController extends Controller
     public function transaksiprint($id, $penjualan_id)
     {
         $pj = Penjualan::find($penjualan_id);
-        $pdf  = Pdf::loadView('superadmin.penjualan.print', compact('pj'));
-        $filename = Auth::user()->name . '-' . Carbon::now()->format('Y-m-d-H-i-s') . '.pdf';
-        return $pdf->stream($filename);
+        return view('superadmin.penjualan.print', compact('pj'));
+        // $filename = Auth::user()->name . '-' . Carbon::now()->format('Y-m-d-H-i-s') . '.pdf';
+        // return $pdf->stream($filename);
     }
 }
