@@ -2,13 +2,29 @@
 
 use App\Models\Barang;
 use App\Models\Satuan;
+use App\Models\Pelanggan;
 use App\Models\BarangToko;
+use App\Models\Penjualan;
+use App\Models\Teknisi;
 
 function satuan()
 {
     return Satuan::get();
 }
 
+function penjualan()
+{
+    return Penjualan::orderBy('id', 'DESC')->get();
+}
+
+function teknisi()
+{
+    return Teknisi::orderBy('id', 'DESC')->get();
+}
+function pelanggan()
+{
+    return Pelanggan::orderBy('id', 'DESC')->get();
+}
 function barang()
 {
     return Barang::orderBy('id', 'DESC')->get();

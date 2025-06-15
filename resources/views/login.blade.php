@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Toko Raja Pancing</title>
+    <title>CV CAHAYA KALTIM</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
@@ -24,9 +24,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             style="background-color: #2969b0 !important; background-image:linear-gradient(to right , #0954a9, #0785a9, #4db1a5, #2ba79f)">
             <div class="container">
                 <a href="#" class="navbar-brand">
-                    <img src="/admin/logopng.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    <img src="/admin/logo2.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                         style="opacity: .8">
-                    <span class="brand-text font-weight-light text-white"><b>TOKO RAJA PANCING</b></span>
+                    <span class="brand-text font-weight-light text-white"><b>Sistem Monitoring dan Maintenance Mesin
+                            Fotocopy</b></span>
                 </a>
 
                 <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
@@ -63,9 +64,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="col-lg-4">
 
                             <div class="text-center">
-                                <img src="/admin/logopng.jpg" alt="AdminLTE Logo" width="100px">
+                                <img src="/admin/logo2.png" alt="AdminLTE Logo" width="100px">
                             </div>
                             <br />
+                            <h2 class="text-center">CV. CAHAYA KALTIM BANJARMASIN</h2>
                             <div class="card">
                                 <div class="card-body">
                                     <form action="/login" method="post">
@@ -105,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Main Footer -->
         <footer class="main-footer text-center">
-            <strong>inventory</strong>
+            <strong>MAHDI</strong>
         </footer>
     </div>
     <!-- ./wrapper -->

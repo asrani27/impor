@@ -11,7 +11,7 @@
 @endsection
 @section('content')
 <br />
-<form method="post" action="/penjualan/toko/{{$id}}/create">
+<form method="post" action="/penjualan/create">
     <div class="row">
         <div class="col-md-3">
             <div class="card card-primary card-outline">
@@ -31,8 +31,12 @@
                         <input type="text" class="form-control" name="nota" value="{{$kode}}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Nama Pembeli</label>
-                        <input type="text" class="form-control" name="nama_pelanggan" value="-">
+                        <select id="id_select2_example" name="pelanggan_id" class="form-control select2">
+                            <option value="">-</option>
+                            @foreach (pelanggan() as $item)
+                            <option value="{{$item->id}}">{{$item->nama}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
@@ -48,7 +52,8 @@
                         <select id="id_select2_example" name="barang_id" class="form-control select2">
                             <option value="">-Pilih Barang-</option>
                             @foreach ($barang as $item)
-                            <option value="{{$item->id}}"><img src="/storage/compress/{{$item->file}}" >{{$item->nama}}, Stok: {{$item->stok}}, Rp.
+                            <option value="{{$item->id}}"><img src="/storage/compress/{{$item->file}}">{{$item->nama}},
+                                Rp.
                                 {{number_format($item->harga)}}</option>
                             @endforeach
                         </select>
@@ -71,8 +76,6 @@
                                 <th>Kode</th>
                                 <th>Nama Barang</th>
                                 <th>Harga</th>
-                                <th>Diskon</th>
-                                <th>Harga Final</th>
                                 <th>Jumlah</th>
                                 <th>Total</th>
                                 <th>#</th>
@@ -86,12 +89,6 @@
                                 <td>{{$item->barang == null ? '' :$item->barang->kode}}</td>
                                 <td>{{$item->barang == null ? '' :$item->barang->nama}}</td>
                                 <td>Rp. {{number_format($item->harga)}}</td>
-                                <td>{{round($item->diskon, 2)}} %</td>
-                                <td>Rp. {{number_format($item->harga_jual)}}
-                                    <a href="#"><i class="fa fa-edit text-primary edit-harga" data-id="{{$item->id}}"
-                                            data-nama="{{$item->barang->nama}}"
-                                            data-harga="{{$item->harga_jual}}"></i></a>
-                                </td>
                                 <td>{{number_format($item->jumlah)}}</td>
                                 <td>Rp. {{number_format($item->total)}}</td>
                                 <td><a href="/keranjang/delete/{{$item->id}}"
@@ -121,7 +118,7 @@
                 <div class="card-footer">
 
                     <button type="submit" class="btn btn-primary" name="button" value="checkout">Checkout</button>
-                    <a href="/penjualan/toko/{{$id}}/batal" onclick="return confirm('Yakin ingin dibatalkan?');"
+                    <a href="/penjualan/batal" onclick="return confirm('Yakin ingin dibatalkan?');"
                         class="btn btn-danger">Batal</a>
                 </div>
                 <!-- /.card-body -->
@@ -170,7 +167,7 @@
 <script src="/admin/plugins/select2/js/select2.full.min.js">
 </script>
 <script>
-  function formatState (state) {
+    function formatState (state) {
   if (!state.id) {
     return state.text;
   }

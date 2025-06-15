@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @push('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -11,53 +12,39 @@
     <div class="col-12">
         <div class="card card-primary card-outline">
             <div class="card-header">
-                <h3 class="card-title">Data Barang</h3>
+                <h3 class="card-title">Data User</h3>
+
                 <div class="card-tools">
-                    <a href="/barang/create" type="button" class="btn bg-gradient-blue btn-sm">
-                        <i class="fa fa-plus"></i> Tambah Data</a>
+                    <a href="/user/add" class='btn btn-sm btn-success'>Tambah Data</a>
                 </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive p-2">
+            <div class="card-body table-responsive">
                 <table id="example1" class="table table-bordered table-striped table-sm">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Gambar</th>
-                            <th>Kode Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Satuan</th>
-                            <th>Merk</th>
-                            <th>Jenis</th>
-                            <th>Harga</th>
+                            <th>Username</th>
+                            <th>Nama Lengkap</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    @php
-                    $no =1;
-                    @endphp
                     <tbody>
                         @foreach ($data as $key => $item)
-                        <tr>
-                            <td>{{$no++}}</td>
-                            <td><a href="/storage/real/{{$item->file}}" target="_blank"><img
-                                        src="/storage/compress/{{$item->file}}" width="50px"></a></td>
-                            <td>{{$item->kode}}</td>
-                            <td>{{$item->nama}}</td>
-                            <td>{{$item->satuan->nama}}</td>
-                            <td>{{$item->merk}}</td>
-                            <td>{{$item->jenis}}</td>
-                            <td>{{number_format($item->harga)}}</td>
-                            <td>
+                        <tr style="font-size:14px">
+                            <td>{{$key + 1}}</td>
+                            <td>{{$item->username}}</td>
+                            <td>{{$item->name}}</td>
+                            <td class="text-right">
 
-                                <a href="/barang/edit/{{$item->id}}" class="btn btn-xs btn-success"><i
-                                        class="fas fa-edit"></i> Edit</a>
-                                <a href="/barang/delete/{{$item->id}}" class="btn btn-xs btn-danger"
-                                    onclick="return confirm('yakin DI Hapus?');"><i class="fas fa-trash"></i> Hapus</a>
-
+                                <a href="/user/edit/{{$item->id}}" class="btn btn-sm btn-success"><i
+                                        class="fa fa-edit"></i></a>
+                                <a href="/user/delete/{{$item->id}}" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Yakin ingin dihapus?');"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach
+
                     </tbody>
                 </table>
             </div>

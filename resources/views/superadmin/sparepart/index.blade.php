@@ -11,9 +11,9 @@
     <div class="col-12">
         <div class="card card-primary card-outline">
             <div class="card-header">
-                <h3 class="card-title">Data Barang</h3>
+                <h3 class="card-title">Data sparepart</h3>
                 <div class="card-tools">
-                    <a href="/barang/create" type="button" class="btn bg-gradient-blue btn-sm">
+                    <a href="/sparepart/create" type="button" class="btn bg-gradient-blue btn-sm">
                         <i class="fa fa-plus"></i> Tambah Data</a>
                 </div>
             </div>
@@ -23,13 +23,11 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Gambar</th>
-                            <th>Kode Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Satuan</th>
-                            <th>Merk</th>
+                            <th>Kode sparepart</th>
+                            <th>Nama sparepart</th>
                             <th>Jenis</th>
                             <th>Harga</th>
+                            <th>keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -40,19 +38,16 @@
                         @foreach ($data as $key => $item)
                         <tr>
                             <td>{{$no++}}</td>
-                            <td><a href="/storage/real/{{$item->file}}" target="_blank"><img
-                                        src="/storage/compress/{{$item->file}}" width="50px"></a></td>
                             <td>{{$item->kode}}</td>
                             <td>{{$item->nama}}</td>
-                            <td>{{$item->satuan->nama}}</td>
-                            <td>{{$item->merk}}</td>
                             <td>{{$item->jenis}}</td>
                             <td>{{number_format($item->harga)}}</td>
+                            <td>{{$item->keterangan}}</td>
                             <td>
 
-                                <a href="/barang/edit/{{$item->id}}" class="btn btn-xs btn-success"><i
+                                <a href="/sparepart/edit/{{$item->id}}" class="btn btn-xs btn-success"><i
                                         class="fas fa-edit"></i> Edit</a>
-                                <a href="/barang/delete/{{$item->id}}" class="btn btn-xs btn-danger"
+                                <a href="/sparepart/delete/{{$item->id}}" class="btn btn-xs btn-danger"
                                     onclick="return confirm('yakin DI Hapus?');"><i class="fas fa-trash"></i> Hapus</a>
 
                             </td>

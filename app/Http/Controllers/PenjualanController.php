@@ -18,7 +18,7 @@ class PenjualanController extends Controller
 {
     public function penjualan()
     {
-        $data = Toko::orderBy('id', 'DESC')->get();
+        $data = Penjualan::orderBy('id', 'DESC')->get();
         return view('superadmin.penjualan.index', compact('data'));
     }
 
@@ -29,39 +29,40 @@ class PenjualanController extends Controller
         return view('superadmin.penjualan.penjualan', compact('data', 'toko'));
     }
 
-    public function transaksi($id)
+    public function transaksi()
     {
-        $barang = Barang::whereHas('toko', function ($q) use ($id) {
-            $q->where('toko_id', '=', $id);
-        })->get();
+        // $barang = Barang::whereHas('toko', function ($q) use ($id) {
+        //     $q->where('toko_id', '=', $id);
+        // })->get();
 
-        $barang->map(function ($item) use ($id) {
-            $item->harga = BarangToko::where('barang_id', $item->id)->where('toko_id', $id)->first()->harga;
-            return $item;
-        });
+        // $barang->map(function ($item) use ($id) {
+        //     $item->harga = BarangToko::where('barang_id', $item->id)->where('toko_id', $id)->first()->harga;
+        //     return $item;
+        // });
 
-        $keranjang = Keranjang::where('toko_id', $id)->get();
+        $barang = Barang::get();
+        $keranjang = Keranjang::get();
 
-        $check = Penjualan::where('toko_id', $id)->get();
+        $check = Penjualan::get();
         if (count($check) == 0) {
-            $kode = $id . '0000001';
+            $kode = '0000001';
         } else {
-            $number = count($check) + 1;
+            $number = $check->last()->id + 1;
             if (strlen($number) == 1) {
-                $kode = $id . '000000' . $number;
+                $kode = '000000' . $number;
             } elseif (strlen($number) == 2) {
-                $kode = $id . '00000' . $number;
+                $kode = '00000' . $number;
             } elseif (strlen($number) == 3) {
-                $kode = $id . '0000' . $number;
+                $kode = '0000' . $number;
             } elseif (strlen($number) == 4) {
                 $kode = $number;
             }
         }
 
-        return view('superadmin.penjualan.create', compact('barang', 'kode', 'keranjang', 'id'));
+        return view('superadmin.penjualan.create', compact('barang', 'kode', 'keranjang'));
     }
 
-    public function transaksisimpan(Request $req, $id)
+    public function transaksisimpan(Request $req)
     {
         if ($req->button == 'keranjang') {
             if ($req->barang_id == null || $req->jumlah == null) {
@@ -70,28 +71,21 @@ class PenjualanController extends Controller
                 return back();
             }
 
-            $barang = BarangToko::where('barang_id', $req->barang_id)->where('toko_id', $id)->first();
-            $checkKeranjang = Keranjang::where('toko_id', $id)->where('barang_id', $req->barang_id)->first();
+            $barang = BarangToko::where('barang_id', $req->barang_id)->first();
+            $checkKeranjang = Keranjang::where('barang_id', $req->barang_id)->first();
 
             if ($checkKeranjang == null) {
                 $s = new Keranjang;
                 $s->barang_id       = $req->barang_id;
                 $s->harga           = $barang->harga;
-                $s->diskon          = $barang->diskon;
-                $s->harga_jual      = $barang->harga;
-                $s->jumlah    = $req->jumlah;
-                $s->total     = $barang->harga * $req->jumlah;
-                $s->toko_id   = $id;
-                $s->harga_beli = $barang->harga_modal;
+                $s->jumlah          = $req->jumlah;
+                $s->total           = $barang->harga * $req->jumlah;
                 $s->save();
             } else {
                 $update = $checkKeranjang;
                 $update->harga          = $barang->harga;
-                $update->diskon         = $barang->diskon;
-                $update->harga_jual     = $barang->harga;
                 $update->jumlah         = $req->jumlah;
                 $update->total          = $barang->harga * $req->jumlah;
-                $update->harga_beli = $barang->harga_modal;
                 $update->save();
             }
             $req->flash();
@@ -99,59 +93,39 @@ class PenjualanController extends Controller
         } else {
             DB::beginTransaction();
             try {
-                $keranjang = Keranjang::where('toko_id', $id)->get();
+                $keranjang = Keranjang::get();
                 if ($keranjang->count() == 0) {
                     toastr()->error('keranjang Pesanan Kosong');
+                    $req->flash();
+                    return back();
+                }
+                if ($req->pelanggan_id == null) {
+                    toastr()->error('Pilih pelanggan');
                     $req->flash();
                     return back();
                 }
                 $n = new Penjualan;
                 $n->tanggal         = $req->tanggal;
                 $n->nota            = $req->nota;
-                $n->nama_pelanggan  = $req->nama_pelanggan;
+                $n->pelanggan_id    = $req->pelanggan_id;
                 $n->total           = $req->total;
-                $n->toko_id         = $id;
                 $n->save();
-
-                $keranjang->map(function ($item) {
-                    if ($item->jumlah > Barang::find($item->barang_id)->stok) {
-                        $status = true;
-                    } else {
-                        $status = false;
-                    }
-                    $item->status = $status;
-                    return $item;
-                });
-
-                if ($keranjang->where('status', true)->count() > 0) {
-                    toastr()->error('Stok ' . $keranjang->where('status', true)->first()->barang->nama . ' Tidak Mencukupi');
-                    return back();
-                }
 
                 foreach ($keranjang as $item) {
                     $pd = new PenjualanDetail;
                     $pd->penjualan_id   = $n->id;
                     $pd->barang_id      = $item->barang_id;
                     $pd->harga          = $item->harga;
-                    $pd->diskon         = $item->diskon;
-                    $pd->harga_jual     = $item->harga_jual;
                     $pd->jumlah         = $item->jumlah;
-                    $pd->total          = $item->harga_jual * $item->jumlah;
-                    $pd->harga_beli     = $item->harga_beli;
-                    $pd->toko_id        = $id;
+                    $pd->total          = $item->harga * $item->jumlah;
                     $pd->save();
-
-                    //update stok
-                    $update_stok = $item->barang;
-                    $update_stok->stok = $update_stok->stok - $item->jumlah;
-                    $update_stok->save();
 
                     //delete keranjang belanja
                     $item->delete();
                 }
                 DB::commit();
                 toastr()->success('Transaksi Berhasil disimpan');
-                return redirect('/penjualan/toko/' . $id);
+                return redirect('/penjualan');
                 // all good
             } catch (\Exception $e) {
                 //dd($e);

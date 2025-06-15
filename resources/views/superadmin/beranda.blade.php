@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 @endpush
 @section('title')
-<strong>TOKO</strong>
+<strong>APLIKASI SISTEM MONITORING DAN MAINTENANCE MESIN
+    FOTOCOPY</strong>
 @endsection
 @section('content')
 <br />
@@ -20,7 +21,8 @@
             <div class="card-header">
                 <div class="user-block">
                     <span class="username"><a href="#">{{Auth::user()->name}}</a></span>
-                    <span class="description">SELAMAT DATANG DI APLIKASI TOKO </span>
+                    <span class="description">SELAMAT DATANG DI APLIKASI SISTEM MONITORING DAN MAINTENANCE MESIN
+                        FOTOCOPY </span>
                 </div>
             </div>
         </div>

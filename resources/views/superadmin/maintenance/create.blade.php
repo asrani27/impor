@@ -4,90 +4,94 @@
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 @endpush
 @section('title')
-EDIT BARANG
+TAMBAH maintenance
 @endsection
 @section('content')
 <br />
 <div class="row">
     <div class="col-12">
-        <form method="post" action="/barang/edit/{{$data->id}}" enctype="multipart/form-data">
+        <form method="post" action="/maintenance/create" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-12 col-12">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h3 class="card-title">Data Barang</h3>
+                            <h3 class="card-title">Data maintenance</h3>
                             <div class="card-tools">
-                                <a href="/barang" type="button" class="btn bg-gradient-blue btn-sm">
+                                <a href="/maintenance" type="button" class="btn bg-gradient-blue btn-sm">
                                     <i class="fa fa-arrow-left"></i> Kembali</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Kode Barang</label>
+                                <label class="col-sm-2 col-form-label">Kode maintenance</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="kode" value="{{$data->kode}}"
-                                        required>
+                                    <input type="text" class="form-control" name="kode" required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Nama Barang</label>
+                                <label class="col-sm-2 col-form-label">Nama maintenance</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="nama" value="{{$data->nama}}"
-                                        required>
+                                    <input type="text" class="form-control" name="nama" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">jenis maintenance</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="jenis" required>
                                 </div>
                             </div>
 
+
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Satuan Barang</label>
+                                <label class="col-sm-2 col-form-label">Kode Penjualan</label>
                                 <div class="col-sm-10">
-                                    <select name="satuan_id" class="form-control" required>
+                                    <select name="penjualan_id" class="form-control" required>
                                         <option value="">-pilih-</option>
-                                        @foreach (satuan() as $item)
-                                        <option value="{{$item->id}}" {{$data->satuan_id == $item->id ?
-                                            'selected':''}}>{{$item->nama}}</option>
+                                        @foreach (penjualan() as $item)
+                                        <option value="{{$item->id}}">{{$item->nota}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">merk Barang</label>
+                                <label class="col-sm-2 col-form-label">Teknisi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="merk" value="{{$data->merk}}"
-                                        required>
+                                    <select name="teknisi_id" class="form-control" required>
+                                        <option value="">-pilih-</option>
+                                        @foreach (teknisi() as $item)
+                                        <option value="{{$item->id}}">{{$item->nama}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">jenis Barang</label>
+                                <label class="col-sm-2 col-form-label">jadwal</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="jenis" value="{{$data->jenis}}"
-                                        required>
+                                    <input type="date" class="form-control" name="jadwal" required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">harga</label>
+                                <label class="col-sm-2 col-form-label">garansi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="harga" value="{{$data->harga}}"
-                                        required onkeypress="return hanyaAngka(event)">
+                                    <input type="text" class="form-control" name="garansi" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Foto Barang</label>
+                                <label class="col-sm-2 col-form-label">keterangan</label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" name="file">
-
-                                    <img src="/storage/compress/{{$data->file}}" width="50px">
+                                    <input type="text" class="form-control" name="keterangan" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label"></label>
                                 <div class="col-sm-10">
                                     <button type="submit"
-                                        class="btn btn-block btn-primary"><strong>UPDATE</strong></button>
+                                        class="btn btn-block btn-primary"><strong>SIMPAN</strong></button>
                                 </div>
                             </div>
                         </div>

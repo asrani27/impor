@@ -12,6 +12,10 @@
         <div class="card card-primary card-outline">
             <div class="card-header">
                 <h3 class="card-title">Transaksi Penjualan</h3>
+                <div class="card-tools">
+                    <a href="/penjualan/create" type="button" class="btn bg-gradient-blue btn-sm">
+                        <i class="fa fa-plus"></i> Tambah Transaksi</a>
+                </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive p-2">
@@ -19,8 +23,10 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kode</th>
-                            <th>Nama Toko</th>
+                            <th>Tanggal</th>
+                            <th>Kode Transaksi</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Total</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -31,13 +37,14 @@
                         @foreach ($data as $key => $item)
                         <tr>
                             <td>{{$no++}}</td>
-                            <td>{{$item->kode}}</td>
-                            <td>{{$item->nama}}</td>
+                            <td>{{$item->tanggal}}</td>
+                            <td>{{$item->nota}}</td>
+                            <td>{{$item->pelanggan == null ? '' : $item->pelanggan->nama}}</td>
+                            <td>{{number_format($item->total)}}</td>
                             <td>
 
-                                <a href="/penjualan/toko/{{$item->id}}" class="btn btn-xs btn-primary"><i
-                                        class="fa fa-shopping-cart"></i> Transaksi Penjualan</a>
-
+                                <a href="/penjualan/delete/{{$item->id}}" onclick="return confirm('yakin di hapus?');"
+                                    class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                             </td>
                         </tr>
                         @endforeach

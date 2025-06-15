@@ -4,27 +4,27 @@
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 @endpush
 @section('title')
-EDIT BARANG
+EDIT sparepart
 @endsection
 @section('content')
 <br />
 <div class="row">
     <div class="col-12">
-        <form method="post" action="/barang/edit/{{$data->id}}" enctype="multipart/form-data">
+        <form method="post" action="/sparepart/edit/{{$data->id}}" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-12 col-12">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h3 class="card-title">Data Barang</h3>
+                            <h3 class="card-title">Data sparepart</h3>
                             <div class="card-tools">
-                                <a href="/barang" type="button" class="btn bg-gradient-blue btn-sm">
+                                <a href="/sparepart" type="button" class="btn bg-gradient-blue btn-sm">
                                     <i class="fa fa-arrow-left"></i> Kembali</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Kode Barang</label>
+                                <label class="col-sm-2 col-form-label">Kode sparepart</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="kode" value="{{$data->kode}}"
                                         required>
@@ -32,7 +32,7 @@ EDIT BARANG
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Nama Barang</label>
+                                <label class="col-sm-2 col-form-label">Nama sparepart</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="nama" value="{{$data->nama}}"
                                         required>
@@ -40,28 +40,7 @@ EDIT BARANG
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Satuan Barang</label>
-                                <div class="col-sm-10">
-                                    <select name="satuan_id" class="form-control" required>
-                                        <option value="">-pilih-</option>
-                                        @foreach (satuan() as $item)
-                                        <option value="{{$item->id}}" {{$data->satuan_id == $item->id ?
-                                            'selected':''}}>{{$item->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">merk Barang</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="merk" value="{{$data->merk}}"
-                                        required>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">jenis Barang</label>
+                                <label class="col-sm-2 col-form-label">jenis sparepart</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="jenis" value="{{$data->jenis}}"
                                         required>
@@ -76,11 +55,10 @@ EDIT BARANG
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Foto Barang</label>
+                                <label class="col-sm-2 col-form-label">keterangan</label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" name="file">
-
-                                    <img src="/storage/compress/{{$data->file}}" width="50px">
+                                    <input type="text" class="form-control" name="keterangan"
+                                        value="{{$data->keterangan}}" required>
                                 </div>
                             </div>
                             <div class="form-group row">

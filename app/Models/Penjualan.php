@@ -20,4 +20,8 @@ class Penjualan extends Model
     {
         return $this->belongsTo(Toko::class, 'toko_id');
     }
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class, 'pelanggan_id');
+    }
 }

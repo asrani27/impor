@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>TOKO</title>
+  <title>CV CAHAYA</title>
   @include('layouts.css')
   <style>
     .active {
@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <a href="#" class="brand-link navbar-lightblue" style="
       background-color: #0954a9 !important;">
         <span class="brand-text font-weight-light text-white text-CENTER">
-          INVENTORY STOCK
+          MONITORING & MAINTENANCE
         </span>
       </a>
       <div class="sidebar">
@@ -76,7 +76,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <footer class="main-footer">
       <div class="float-right d-none d-sm-inline">
       </div>
-      <strong>Copyright &copy; 2022 Banjarmasin</strong>
+      <strong>MAHDI</strong>
       <div class="float-right d-none d-sm-inline-block">
 
 
